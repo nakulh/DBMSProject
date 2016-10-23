@@ -3,9 +3,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-    <li role="presentation"><a href="#relatives" aria-controls="relatives" role="tab" data-toggle="tab">Relatives</a></li>
-    <li role="presentation"><a href="#books" aria-controls="books" role="tab" data-toggle="tab">Books</a></li>
-    <li role="presentation"><a href="#papers" aria-controls="papers" role="tab" data-toggle="tab">Papers</a></li>
+    <li role="presentation"><a href="#relatives" aria-controls="relatives" role="tab" data-toggle="tab">Add Authors</a></li>
   </ul>
   <div class="alert alert-success" role="alert">
   </div>
@@ -14,16 +12,13 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="profile">
-      <h4>Name <small>{{student.name}}</small></h4>
-      <h4>Type <small>{{student.type}}</small></h4>
-      <h4>Date of Birth <small>{{student.dateOfBirth}}</small></h4>
-      <h4>Education <small>{{student.education}}</small></h4>
-      <h4>Date of Joining <small>{{student.dateOfJoin}}</small></h4>
-      <h4>Status <small>{{student.status}}</small></h4>
-      <h4>Comment <small>{{student.comment}}</small></h4>
-      <h3> Relatives </h3>
+      <h4>Title <small>{{paper.title}}</small></h4>
+      <h4>Description <small>{{paper.description}}</small></h4>
+      <h4>Date of Publication <small>{{paper.publicationDate}}</small></h4>
+      <h4>Isbn <small>{{paper.isbn}}</small></h4>
+      <h5>Authors</h5>
       <ul>
-        {{#each relations}}
+        {{#each authors}}
           <li><a href="{{href}}">{{name}}</a></li>
         {{/each}}
       </ul>
@@ -52,16 +47,6 @@
         </div>
       </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="books">
-      {{#each books}}
-      <li><a href="{{href}}"> {{book}}</a></li>
-      {{/each}}
-    </div>
-    <div role="tabpanel" class="tab-pane" id="papers">
-      {{#each papers}}
-      <li><a href="{{href}}"> {{paper}}</a></li>
-      {{/each}}
-    </div>
   </div>
 </div>
-<script src="../../public/js/persons.js"></script>
+<script src="../../public/js/publications.js"></script>

@@ -4,7 +4,9 @@ var PaperSchema = new Schema({
   title: {type: String},
   description: {type: String},
   publicationDate: {type: Date},
-  authors: [],
+  studentAuthors: [],
+  facultyAuthors: [],
+  externalAuthors: [],
   isbn: {type: String},
 });
 module.exports = mongoose.model('Paper', PaperSchema);

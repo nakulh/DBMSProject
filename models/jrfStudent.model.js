@@ -7,7 +7,7 @@ var JrfStudentSchema = new Schema({
   papers: [],
   books: [],
   education: {type: String},
-  relations: {},
+  relations: [],
   dateOfJoin: {type: Date},
   status: {type : String},
   submissionDate: {type: Date},

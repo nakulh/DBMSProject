@@ -3,12 +3,14 @@ var mongoose = require('mongoose'),
 var FacultySchema = new Schema({
   type: {type: String},
   name: {type: String},
-  age: {type: Number},
+  dateOfBirth: {type: Date},
+  studentsUnder: [],
   papers: [],
   books: [],
   education: {type: String},
-  relations: {},
+  relations: [],
   dateOfJoin: {type: Date},
   comment: {type: String},
+  status: {type : String}
 });
 module.exports = mongoose.model('Faculty', FacultySchema);

@@ -7,7 +7,7 @@ app.set('port', process.env.PORT || 5000);
 app.set('views','./views');
 app = config(app);
 
-mongoose.connect('mongodb://localhost/ece-dbms');
+mongoose.connect('mongodb://127.0.0.1/ece-dbms');
 mongoose.connection.on('open', function() {
   console.log('Mongoose connected.');
 });

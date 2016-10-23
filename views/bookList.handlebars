@@ -1,0 +1,25 @@
+<script src="../../public/js/fuse.min.js"></script>
+<input type="text" class="form-control bookForm" placeholder="Title">
+<div id="booksTable">
+</div>
+
+<form action="/book/create" method="post">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input name="title" type="text" class="form-control" id="title" placeholder="Title" required>
+  </div>
+  <div class="form-group">
+    <label for="publicationDate">Date of Publication</label>
+    <input name="publicationDate" type="date" class="form-control" id="publicationDate">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input name="description" type="textarea" class="form-control" id="description" placeholder="description">
+  </div>
+  <div class="form-group">
+    <label for="isbn">Isbn</label>
+    <input name="isbn" type="text" class="form-control" id="isbn" placeholder="isbn" required>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<script src="../../public/js/bookList.js"></script>

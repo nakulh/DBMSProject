@@ -7,11 +7,11 @@ var mongoose = require('mongoose');
 module.exports = {
  id: function(req, res) {
    var viewModel = {
-      student: {},
+      faculty: {},
       books: [],
       papers: [],
       relations: [],
-      guides: []
+      studentsUnder: []
     };
     var insertFacultyRelative = function(err, relative){
       if(err) {throw err;}
@@ -33,19 +33,18 @@ module.exports = {
         console.log("relative name = " + relative.name);
       }
     };
-   jrfModel.findOne({'_id': mongoose.Types.ObjectId(req.params.id)}, function(err, student){
+   facultyModel.findOne({'_id': mongoose.Types.ObjectId(req.params.id)}, function(err, faculty){
      if(err) {throw err;}
-     if(student){
-       console.log(student);
-       viewModel.student = student;
-       console.log(viewModel.student.dateOfJoin.toString());
-       for(var q = 0; q < student.books.length; q++){
-         student.books[q] = mongoose.Types.ObjectId(student.books[q]);
+     if(faculty){
+       console.log(faculty);
+       viewModel.faculty = faculty;
+       for(var q = 0; q < faculty.books.length; q++){
+         faculty.books[q] = mongoose.Types.ObjectId(faculty.books[q]);
        }
-       for(q = 0; q < student.papers.length; q++){
-         student.papers[q] = mongoose.Types.ObjectId(student.papers[q]);
+       for(q = 0; q < faculty.papers.length; q++){
+         faculty.papers[q] = mongoose.Types.ObjectId(faculty.papers[q]);
        }
-       bookModel.find({'_id': { $in: student.books}}, function(err, books){
+       bookModel.find({'_id': { $in: faculty.books}}, function(err, books){
          if(err) {throw err;}
          if(books){
            for(var q = 0; q < books.length; q++){
@@ -56,7 +55,7 @@ module.exports = {
            }
          }
        });
-       paperModel.find({'_id': { $in: student.papers}}, function(err, papers){
+       paperModel.find({'_id': { $in: faculty.papers}}, function(err, papers){
           if(err) {throw err;}
           if(papers){
             for(var q = 0; q < papers.length; q++){
@@ -64,15 +63,15 @@ module.exports = {
                 paper: papers[q].title,
                 href: "/paper/id/" + papers[q]._id.toString()
               });
+              console.log(papers);
             }
-            console.log(viewModel.papers);
           }
        });
-       for(var y = 0; y < student.relations.length; y++){
-         facultyModel.findOne({'_id': mongoose.Types.ObjectId(student.relations[y])}, insertFacultyRelative);
-         jrfModel.findOne({'_id': mongoose.Types.ObjectId(student.relations[y])}, insertJrfRelative);
+       for(var y = 0; y < faculty.relations.length; y++){
+         facultyModel.findOne({'_id': mongoose.Types.ObjectId(faculty.relations[y])}, insertFacultyRelative);
+         jrfModel.findOne({'_id': mongoose.Types.ObjectId(faculty.relations[y])}, insertJrfRelative);
        }
-       res.render('jrfStudent', viewModel);
+       res.render('faculty', viewModel);
      }
      else{
         res.redirect('/');
@@ -80,48 +79,47 @@ module.exports = {
    });
  },
  create: function(req, res){
-   var newJrfStudent = new jrfModel({
+   var newFaculty = new facultyModel({
      name: req.body.name,
      type: req.body.type,
      dateOfBirth: req.body.dateOfBirth,
      education: req.body.education,
      dateOfJoin: req.body.dateOfJoin,
      status: req.body.status,
-     submissionDate: req.body.submissionDate,
-     awardDate: req.body.awardDate,
      comment: req.body.comment,
-     phdAwarded: req.body.phdAwarded
    });
-   newJrfStudent.save(function(err, jrf){
+   newFaculty.save(function(err, faculty){
      if(err){
        throw err;
      }
      else{
-       console.log("saved new jrf");
+       console.log("saved new faculty");
        res.render('saved');
      }
    });
  },
  list: function(req, res){
    var viewModel = {
-     jrfs: []
+     faculties: []
    };
-   jrfModel.find({}, function(err, jrfs){
+   facultyModel.find({}, function(err, faculties){
      if(err){
        throw err;
      }
-     if(jrfs){
-       for(var x = 0; x < jrfs.length; x++){
-         jrfs[x].href = "/jrfStudent/id/" + jrfs[x]._id.toString();
-         console.log(jrfs[x].href);
+     if(faculties){
+       for(var x = 0; x < faculties.length; x++){
+         faculties[x].href = "/faculty/id/" + faculties[x]._id.toString();
+         console.log(faculties[x].href);
        }
-       viewModel.jrfs = jrfs;
+       viewModel.faculties = faculties;
      }
      else{
-       console.log("no jrf data");
-       viewModel.jrfs = "no DATA";
+       console.log("no faculty data");
+       viewModel.faculties = "no DATA";
      }
-     res.json({'students': viewModel.jrfs});
+     res.json({
+       faculties: viewModel.faculties
+     });
    });
  }
 };
