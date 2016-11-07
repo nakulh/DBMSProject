@@ -20,7 +20,31 @@
       <h4>Education <small>{{student.education}}</small></h4>
       <h4>Date of Joining <small>{{student.dateOfJoin}}</small></h4>
       <h4>Status <small>{{student.status}}</small></h4>
+      <h4>Admission no. <small>{{student.admnNo}}</small></h4>
+      <h4>Thesis status. <small>{{student.thesisStatus}}</small></h4>
+      <h4>E-mail <small>{{student.email}}</small></h4>
+      <h4>Mobile <small>{{student.mobile}}</small></h4>
+      <h4>Bio Id <small>{{student.bioId}}</small></h4>
+      <h4>Phd Awarded <small>{{student.phdAwarded}}</small></h4>
       <h4>Comment <small>{{student.comment}}</small></h4>
+      <script type="text/javascript">
+        var printArduino = function(){
+          var sourceId = window.location.pathname.split("/").pop();
+          var sourceType = window.location.pathname.split("/")[1];
+          $.post("/print",
+          {
+            id: sourceId,
+            type: sourceType
+          }, function(data) {
+            console.log(data);
+          });
+        };
+        var go = function(){
+          window.location.href = window.location.pathname.split("/")[0] + "/" + window.location.pathname.split("/")[1] + "/" + window.location.pathname.split("/").pop() + "/edit";
+        };
+      </script>
+      <button id="print" onclick="printArduino()">Print</button>
+      <button id="edit" onclick="go()">Edit Info</button>
       <h3> Relatives </h3>
       <ul>
         {{#each relations}}

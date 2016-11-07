@@ -90,7 +90,14 @@ module.exports = {
      submissionDate: req.body.submissionDate,
      awardDate: req.body.awardDate,
      comment: req.body.comment,
-     phdAwarded: req.body.phdAwarded
+     phdAwarded: req.body.phdAwarded,
+     admnNo: req.body.admnNo,
+     thesisStatus: req.body.thesisStatus,
+     email: req.body.email,
+     mobile: req.body.mobile,
+     bioId: req.body.bioId,
+     entrance: req.body.entrance,
+     duration: req.body.duration
    });
    newJrfStudent.save(function(err, jrf){
      if(err){
@@ -122,6 +129,11 @@ module.exports = {
        viewModel.jrfs = "no DATA";
      }
      res.json({'students': viewModel.jrfs});
+   });
+ },
+ basicInfo: function(req, res){
+   jrfModel.findOne({'_id': mongoose.Types.ObjectId(req.body.id)}, function(err, student){
+     res.json(student);
    });
  }
 };

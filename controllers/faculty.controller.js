@@ -121,5 +121,11 @@ module.exports = {
        faculties: viewModel.faculties
      });
    });
+ },
+ basicInfo: function(req, res){
+   facultyModel.findOne({'_id': mongoose.Types.ObjectId(req.body.id)}, function(err, faculty){
+     console.log(faculty);
+     res.json(faculty);
+   });
  }
 };

@@ -1,0 +1,40 @@
+<script src="../../public/js/editFaculty.js"></script>
+<form>
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required>
+  </div>
+  <div class="form-group">
+  <label for="status">Status</label>
+    <select name="status" class="form-control" id="status">
+      <option value="Ongoing">Ongoing</option>
+      <option value="Terminated">Terminated</option>
+      <option value="Left">Left</option>
+    </select>
+  </div>
+  <div class="form-group">
+  <label for="type">Type</label>
+    <select name="type" class="form-control" id="type">
+      <option value="Professor">Professor</option>
+      <option value="Associate Professor">Associate Professor</option>
+      <option value="Assistent Professor">Assistent Professor</option>
+    </select>
+  </div>
+  <!--<div class="form-group">
+    <label for="dateOfBirth">Date of Birth</label>
+    <input name="dateOfBirth" type="date" class="form-control" id="dateOfBirth">
+  </div>-->
+  <div class="form-group">
+    <label for="education">Education</label>
+    <input name="education" type="text" class="form-control" id="education" placeholder="education">
+  </div>
+  <!--<div class="form-group">
+    <label for="dateOfJoin">Date of Joining</label>
+    <input name="dateOfJoin" type="date" class="form-control" id="dateOfJoin">
+  </div>-->
+  <div class="form-group">
+    <label for="comment">Comments</label>
+    <input name="comment" type="textarea" class="form-control" id="comment" placeholder="comments" required>
+  </div>
+</form>
+<button onclick="editor()" class="btn btn-default">Submit</button>

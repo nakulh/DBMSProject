@@ -21,6 +21,24 @@
       <h4>Date of Joining <small>{{faculty.dateOfJoin}}</small></h4>
       <h4>Status <small>{{faculty.status}}</small></h4>
       <h4>Comment <small>{{faculty.comment}}</small></h4>
+      <script type="text/javascript">
+        var printArduino = function(){
+          var sourceId = window.location.pathname.split("/").pop();
+          var sourceType = window.location.pathname.split("/")[1];
+          $.post("/print",
+          {
+            id: sourceId,
+            type: sourceType
+          }, function(data) {
+            console.log(data);
+          });
+        }
+        var go = function(){
+          window.location.href = window.location.pathname.split("/")[0] + "/" + window.location.pathname.split("/")[1] + "/" + window.location.pathname.split("/").pop() + "/edit";
+        };
+      </script>
+      <button id="print" onclick="printArduino()">PRINT</button>
+      <button id="edit" onclick="go()">Edit Info</button>
       <h3> Relatives </h3>
       <ul>
         {{#each relations}}

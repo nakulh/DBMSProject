@@ -12,7 +12,15 @@ var api = require('./controllers/api.controller');
 module.exports = function(app){
   router.get('/', home.index);
   router.get('/jrfStudent/id/:id', student.id);
+  router.get('/jrfStudent/:id/edit', function(req, res){
+    res.render('jrfEdit');
+  });
+  router.post('/editJrfInfo', student.basicInfo);
   router.get('/faculty/id/:id', faculty.id);
+  router.get('/faculty/:id/edit', function(req, res){
+    res.render('facultyEdit');
+  });
+  router.post('/editFacultyInfo', faculty.basicInfo);
   router.get('/paper/id/:id', paper.id);
   router.get('/book/id/:id', book.id);
   router.get('/jrfStudent/', function(req, res){
@@ -38,5 +46,7 @@ module.exports = function(app){
   router.get('/list/', api.list);
   router.post('/relate/', api.relate);
   router.post('/addInsideAuthor/', api.addInsideAuthor);
+  router.post('/print/', api.print);
+  router.post('/saveInfo', api.saveInfo);
   app.use(router);
 };
